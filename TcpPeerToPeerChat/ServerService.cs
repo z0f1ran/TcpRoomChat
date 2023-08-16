@@ -14,7 +14,7 @@ namespace TcpPeerToPeerChat
     internal class ServerService:IDisposable
     {
         private Socket server;
-        private List<Communication> clientList;
+        private List<Communication> clientList = new List<Communication>();
         private Communication communication;
         public Communication GetCommunication() { return communication; }
         public ServerService(string ip, int port)
@@ -29,6 +29,12 @@ namespace TcpPeerToPeerChat
             // 3.
             server.Listen(10);
             // 4.
+            clientList.Add(communication);
+            
+        }
+
+        public void StartServer()
+        {
             while (true)
             {
                 Communication client = new Communication(server.Accept());
@@ -67,7 +73,7 @@ namespace TcpPeerToPeerChat
             catch (Exception ex)
             {
                 // Обработка ошибок, если клиент или соединение неожиданно закрылось
-                Console.WriteLine($"Client thread error: {ex.Message}");
+                MessageBox.Show($"Client thread error: {ex.Message}");
             }
         }
         public void SendToAll(string message)
@@ -76,12 +82,15 @@ namespace TcpPeerToPeerChat
             {
                 try
                 {
-                    client.SendMessage(message);
+                    if (client != null)
+                    {
+                        client.SendMessage(message);
+                    }       
                 }
                 catch (Exception ex)
                 {
                     // Обрабатываем любые исключения, которые могут возникнуть при отправке клиенту.
-                    Console.WriteLine($"Ошибка при отправке сообщения клиенту: {ex.Message}");
+                    MessageBox.Show($"Ошибка при отправке сообщения клиенту: {ex.Message}");
                 }
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,6 +32,7 @@ namespace TcpPeerToPeerChat
             inputWindow.ShowDialog();
             using (ClientService client = new ClientService(inputWindow.ip, inputWindow.port)) 
             {
+                
                 ChatWindow chatWindow = new ChatWindow(client.GetCommunication());
                 chatWindow.ShowDialog();
             }
@@ -42,8 +44,11 @@ namespace TcpPeerToPeerChat
             inputWindow.ShowDialog();
             using (ServerService server = new ServerService(inputWindow.ip, inputWindow.port))
             {
+                Thread serverThread = new Thread(server.StartServer);
+                serverThread.Start();
                 ChatWindow chatWindow = new ChatWindow(server.GetCommunication());
                 chatWindow.ShowDialog();
+                serverThread.Join();
             }            
         }
 
