@@ -32,10 +32,13 @@ namespace TcpPeerToPeerChat
             while (true)
             {
                 Communication client = new Communication(server.Accept());
-                clientList.Add(client);
+                if (client != null)
+                {
+                    clientList.Add(client);
 
-                Thread clientThread = new Thread(ClientThreadFunction);
-                clientThread.Start(client);
+                    Thread clientThread = new Thread(ClientThreadFunction);
+                    clientThread.Start(client);
+                }
             }
         }
         private void ClientThreadFunction(object clientObject)
