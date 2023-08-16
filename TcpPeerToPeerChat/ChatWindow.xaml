@@ -1,0 +1,27 @@
+﻿<Window x:Class="TcpPeerToPeerChat.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TcpPeerToPeerChat"
+        mc:Ignorable="d"
+        Title="ChatWindow" Height="450" Width="800" FontSize="25">
+    <Window.Resources>
+        <Style x:Key="style" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="Control.Background" Value="White"></Setter>
+            <Setter Property="Control.Margin" Value="10"></Setter>
+            <Setter Property="Control.Padding" Value="5"></Setter>
+        </Style>
+        <Style TargetType="ListBox" BasedOn="{StaticResource style}"/>
+        <Style TargetType="TextBox" BasedOn="{StaticResource style}"/>
+        <Style TargetType="Button" BasedOn="{StaticResource style}"/>
+    </Window.Resources>
+    <StackPanel>
+        <ListBox x:Name="listBoxMessenger" Height="350"></ListBox>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Width="578" x:Name="txtBoxMessage"></TextBox>
+            <Button Name="btnSend" Content="Send" Click="btnSend_Click"></Button>
+            <Button Name="btnReceive" Content="Receive" Click="btnReceive_Click"></Button>
+        </StackPanel>        
+    </StackPanel>
+</Window>
