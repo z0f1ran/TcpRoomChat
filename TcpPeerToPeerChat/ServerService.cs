@@ -11,11 +11,11 @@ using System.Windows.Controls;
 
 namespace TcpPeerToPeerChat
 {
-    internal class ServerService:IDisposable
+    internal class ServerService: IDisposable
     {
         private Socket server;
         private List<Communication> clientList = new List<Communication>();
-        private Communication communication;
+        private Communication communication = null;
         public Communication GetCommunication() { return communication; }
         public ServerService(string ip, int port)
         {
@@ -28,9 +28,6 @@ namespace TcpPeerToPeerChat
             server.Bind(serverEndPoint);
             // 3.
             server.Listen(10);
-            // 4.
-            clientList.Add(communication);
-            
         }
 
         public void StartServer()
