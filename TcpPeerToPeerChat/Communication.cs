@@ -11,13 +11,13 @@ namespace TcpPeerToPeerChat
     public class Communication
     {
         private Socket socket;
-        private IPAddress clientIPAddress;
+        private EndPoint clientIPAddress;
         public Communication(Socket socket) 
         { 
             this.socket = socket;
-            this.clientIPAddress = ((IPEndPoint)socket.RemoteEndPoint).Address;
+            this.clientIPAddress = socket.LocalEndPoint;
         }
-        public IPAddress GetClientIPAddress()
+        public EndPoint GetClientIPAddress()
         {
             return clientIPAddress;
         }

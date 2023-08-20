@@ -28,6 +28,7 @@ namespace TcpPeerToPeerChat
             server.Bind(serverEndPoint);
             // 3.
             server.Listen(10);
+            communication = new Communication(server);
         }
 
         public void StartServer()
