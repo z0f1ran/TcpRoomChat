@@ -20,7 +20,7 @@ namespace TcpPeerToPeerChat
     /// </summary>
     public partial class ChatWindow : Window
     {
-        Communication communicator = null;
+        Communication communicator;
         DispatcherTimer timer;
         public ChatWindow(Communication communication)
         {

@@ -47,6 +47,7 @@ namespace TcpPeerToPeerChat
                 }
             }
         }
+
         private void ClientThreadFunction(object clientObject)
         {
             Communication client = (Communication)clientObject;

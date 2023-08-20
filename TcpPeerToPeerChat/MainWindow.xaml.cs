@@ -44,9 +44,9 @@ namespace TcpPeerToPeerChat
             inputWindow.ShowDialog();
             using (ServerService server = new ServerService(inputWindow.ip, inputWindow.port))
             {
+                ChatWindow chatWindow = new ChatWindow(server.GetCommunication());
                 Thread serverThread = new Thread(server.StartServer);
                 serverThread.Start();
-                ChatWindow chatWindow = new ChatWindow(server.GetCommunication());
                 chatWindow.ShowDialog();
                 serverThread.Join();
             }            
